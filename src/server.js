@@ -1,7 +1,8 @@
 // const express = require('express')
 import express from "express";
-import userRouter from './routes/userRouter.js'
-import productRouter from './routes/productRouter.js'
+import userRouter from './routers/userRouter.js'
+import productRouter from './routers/productRouter.js'
+import 
 
 const api = express();
 
@@ -11,6 +12,7 @@ api.get("/", (req, res, next) => {
 
 api.use('/user', userRouter)
 api.use('/product', productRouter)
+api.use('/login', authRouter)
 
 const port = 3000;
 api.listen(port, () => {
