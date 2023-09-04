@@ -1,6 +1,24 @@
-const postUser = (req, res, next) => {
-  res.json({ message: "metodo post" });
-}
+import user from '../../models/userModel.js'
 
+const postUser = async (req, res, next) => {
+  try {
+    const userData = req.body
+    const [result] = await user.create(userData)
+    if (result.affectedRows === 1) {
+      res.json({
+        sucess: "Usuário inserido com Sucesso!",
+        user: {
+          id: result.insertId,
+          ...userData
+        }
+      })
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      error: "Erro no servidor!"
+    });
+  }
+}
 export default postUser
 
