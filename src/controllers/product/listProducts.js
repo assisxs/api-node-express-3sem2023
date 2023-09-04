@@ -1,17 +1,17 @@
 import product from '../../models/productModel.js'
 
-const getProduct = async (req, res, next) => {
+const listProducts = async (req, res, next) => {
   try {
     const productData = req.body
-    const [rows] = await product.getById(productData.id)
+    const [rows] = await product.getAll()
     if (rows.length === 0) {
       res.status(404).json({
-        error: `Produto id: ${userData.id} não Encontrado!`
+        error: `Nenhum produto Encontrado!`
       });
     } else {
       res.json({
-        sucess: "Produto Encontrado com sucesso!",
-        product: rows[0]
+        sucess: "Produto(s) Encontrado(s) com sucesso!",
+        products: rows
       });
     }
   } catch (error) {
@@ -22,4 +22,4 @@ const getProduct = async (req, res, next) => {
   }
 }
 
-export default getProduct
+export default listProducts

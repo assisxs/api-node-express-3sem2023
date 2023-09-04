@@ -1,5 +1,19 @@
-const deleteProduct = (req, res, next) => {
-    res.json({ message: "metodo delete product" });
-  }
+import product from '../../models/productModel.js'
 
+const deleteProduct = async (req, res, next) => {
+  try {
+    const productData = req.body
+    const [result] = await product.remove(productData.id)
+    if (result.affectedRows === 1) {
+      res.json({
+        sucess: "Produto deletado com Sucesso!"
+      })
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      error: "Erro no servidor!"
+    });
+  }
+}
 export default deleteProduct
