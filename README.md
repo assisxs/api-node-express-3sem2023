@@ -14,3 +14,14 @@ gut fetch : ve se tem atualizações no repositório
 
 ### node and NPM
 node -v :
+
+## Conceitos importantes
+
+O que é node?
+O que é npm?
+O que é express?
+O que é API?
+O que é RestFULL?
+O que é MVC?
+Para que serve o nodemon?
+Para que serve o package.json?
