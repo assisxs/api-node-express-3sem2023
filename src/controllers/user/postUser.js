@@ -6,7 +6,7 @@ const postUser = async (req, res, next) => {
     const [result] = await user.create(userData)
     if (result.affectedRows === 1) {
       res.json({
-        sucess: "Usuário inserido com Sucesso!",
+        success: "Usuário inserido com Sucesso!",
         user: {
           id: result.insertId,
           ...userData
