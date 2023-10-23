@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Set-2023 às 19:55
+-- Tempo de geração: 23-Out-2023 às 22:15
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.0.13
 
@@ -46,6 +46,18 @@ INSERT INTO `products` (`id`, `name`, `price`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `token` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `users`
 --
 
@@ -62,9 +74,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `photo`) VALUES
+(0, 'Eduardo Assis Couto', 'eduardoassis@gmail.com', '321', 'https://pbs.twimg.com/media/FgxlyqYWYAAoMNj.png'),
 (1, 'Raissa Assis', 'raissaassis@gmail.com', '1234', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlw7M21D5J2Re0hIRjVy6-g98oCBnl3OsFtA&usqp=CAU'),
-(3, 'raissinha', 'raissinhagameplays@gmail.com', '123123', 'https://i.pinimg.com/originals/7c/4b/c1/7c4bc1551fa3c7ce97fce84027509861.png'),
-(4, 'Daniel', 'daniel@gmail.com', '222', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAAD8CAMAAADZlG8gAAABBVBMVEX///8Andz808EuZ7EAAQT+/v77+/v5+fn19fXv7+/p6en29vbt7e3BwcHj4+PFxcVstETR0dGo1Z3b29sAT3DJycmAgILf39/T09O8vLx+amMgGxwAKDo/NjO9n5LNrJ7sxrUQDhBfUEtAQUPduakAdqa1tbUjToZPQz+ehHqtkYZuXVcvKCeOd24MGy+tra1gYGKjo6MwMTNRhzQAFR+PkJEAMkgAgLQXNFsoWptwcHJQUFIAWX4ARWMOITodQXB+oHcAHi0ULlBphmQ0NTcbLhRFRkiYmJkqNiqKxXFYWVoVHBd7vFopRBwUIxBpamtUa1E2WyQ/UT2Tu4pcjUVfnjxEcSx9xM1zAAAV/UlEQVR4nO2dfX/iOJLH6bQ6AYLxMgQTcEMinDgkIfHDhHQC/TDdw4bZzO6ye3s37/+lnKQqyTKYBLBN5nNH/dHdSYP8RfwslUqlcqGws53tbGc729nOdrazne1sZzvb2c52trOd7WxnO9vZznb2f9U+KHtrktcNOC1K/MobEItL1porX1m8cN8jQ88OK/tb5gVYmxBnxa4SsPv7tlUolKjP/rVFXrh2nYaGR8P9ua76sMQY4kGDlNgrAlI/2CYvXHxM2bVrZLoPfRUnS7CDw+LQ4W8v0emh4N0i7UGZjPgP4/HhwQHwNFqeZY0cxyFzRh3HsoZutWT5ooHxc3F7vEB76JEa/ymgxWJ9ajkhw3Icn2EZzJryxSVDmGVZjkNDxxK/tJwS590WrvhiLSJ+MsiU9WboWxHiUisZQ67dgkcrjHdL3ctwGW3JETosBKE/NNZswSDlUrG4ne7lnctoK4i7iRmkKrp3S7gHxWKlPEmFW64I9WbItcQYLu/caircGu/e7eByLVTKy3GbxtDyHWGW5dUSXmGQoFreGu4B79xmIm4pGFPa6b');
+(3, 'Raissinha gameplays', 'raissinha@gmail.com', '222', 'https://64.media.tumblr.com/c8f7e4aac0be6cd7477d9aa94130575c/tumblr_pefr2glkF31rtctzxo6_400.png'),
+(4, 'jake', 'jake@gmail.com', '222', 'https://pm1.aminoapps.com/7777/5927351a27a3ae5bb8a0c3ef357215aa4bde17e3r1-500-427v2_uhq.jpg');
 
 --
 -- Índices para tabelas despejadas
@@ -75,6 +88,14 @@ INSERT INTO `users` (`id`, `name`, `email`, `pass`, `photo`) VALUES
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `index_token` (`token`) USING BTREE,
+  ADD KEY `id_user_user_id` (`id_user`);
 
 --
 -- Índices para tabela `users`
@@ -93,10 +114,26 @@ ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de tabela `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `id_user_user_id` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
