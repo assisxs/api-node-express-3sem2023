@@ -6,7 +6,7 @@ const getProduct = async (req, res, next) => {
     const [rows] = await product.getById(productData.id)
     if (rows.length === 0) {
       res.status(404).json({
-        error: `Produto id: ${userData.id} não Encontrado!`
+        error: `Produto id: ${productData.id} não Encontrado!`
       });
     } else {
       res.json({

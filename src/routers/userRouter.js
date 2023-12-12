@@ -14,7 +14,5 @@ router.get("/list", listUsers);
 router.post("/", postUser);
 router.put("/", putUser);
 router.delete("/", deleteUser);
-router.put('/', auth, putUser);
-router.delete('/', auth, deleteUser);
 
 export default router

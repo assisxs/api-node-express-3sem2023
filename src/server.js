@@ -5,7 +5,8 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import userRouter from './routers/userRouter.js'
 import authRouter from './routers/authRouter.js'
-import {PORT} from './config.js' 
+import productRouter from './routers/productRouter.js'
+import { PORT } from './config.js'
 const api = express()
 var corsOptions = {
     credentials: true,
@@ -17,10 +18,12 @@ api.use(bodyParser.json())
 api.use(cookieParser())
 
 api.get('/', (req, res) => {
-    res.json({message: "Bem-vindo a nossa API"})
+    res.json({ message: "Bem-vindo a nossa API" })
 })
 api.use('/user', userRouter)
 api.use('/auth', authRouter)
+api.use('/product', productRouter)
+
 api.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}! http://localhost:${PORT}`)
 })
